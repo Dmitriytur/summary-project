@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         version="3.0">
+
+
+    <context-param>
+        <param-name>defaultLimit</param-name>
+        <param-value>20</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>allowedColumnsToSort</param-name>
+        <param-value>summary_rating price name</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>limitPeriodicalsHomePage</param-name>
+        <param-value>4</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>categoriesToShowAtHomePage</param-name>
+        <param-value>News &#038; Politics;Art &#038; Photography;Music</param-value>
+    </context-param>
+
+
+
+    <listener>
+        <listener-class>ua.nure.tur.web.listeners.ContextListener</listener-class>
+    </listener>
+
+
+   
+
+    <filter>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <filter-class>ua.nure.tur.web.filters.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </filter>
+    
+    <filter-mapping>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <url-pattern>/page/*</url-pattern>
+    </filter-mapping>
+
+
+    <filter>
+        <filter-name>AccessFilter</filter-name>
+        <filter-class>ua.nure.tur.web.filters.AccessFilter</filter-class>
+
+        <init-param>
+            <param-name>authorizedAccess</param-name>
+            <param-value>profile subscribe review</param-value>
+        </init-param>
+
+        <init-param>
+            <param-name>adminAccess</param-name>
+            <param-value>admin</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>AccessFilter</filter-name>
+        <url-pattern>/page/*</url-pattern>
+    </filter-mapping>
+    
+    <welcome-file-list>
+        <welcome-file>redirect</welcome-file>
+    </welcome-file-list>
+
+    <error-page>
+        <error-code>400</error-code>
+        <location>/WEB-INF/templates/400.jsp</location>
+    </error-page>
+
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/templates/404.jsp</location>
+    </error-page>
+
+
+</web-app>
